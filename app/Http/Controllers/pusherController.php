@@ -90,22 +90,10 @@ class pusherController extends Controller
     }
     public function save_image(Request $request)
     {
-
-        // dd($request);
         $inputString = $request['img'];
-        $fileName = basename($inputString);
+        $result = customFunction($inputString);
+        dd($result);
 
-        $folderPath = public_path('images');
-        $files = glob($folderPath . '/' . $fileName);
-// dd($files);
-        if ($files !== false && $files != null) {
-            foreach ($files as $filePath) {
-                echo "exist" . "<br>";
-                echo $filePath . "<br>";die;
-            }
-        } else {
-            echo "No files found in the folder.";die;
-        }
 
     }
 }
