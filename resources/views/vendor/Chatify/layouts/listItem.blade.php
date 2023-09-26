@@ -84,7 +84,14 @@ $lastMessageBody = strlen($lastMessageBody) > 30 ? mb_substr($lastMessageBody, 0
 
 {{-- -------------------- Shared photos Item -------------------- --}}
 @if($get == 'sharedPhoto')
-<div class="shared-photo chat-image" style="background-image: url('{{ $image }}')"></div>
+
+<?php
+$originalURL = $image;
+// Add the "images" segment after "storage/"
+$modifiedURL = str_replace('/storage/', '/storage/images/', $originalURL);
+
+?>
+<div class="shared-photo chat-image" style="background-image: url('{{ $modifiedURL }}')"></div>
 @endif
 
 

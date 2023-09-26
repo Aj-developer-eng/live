@@ -14,6 +14,13 @@ class TimeRepository extends Repository
     {
         return [
             field('time')->rules('required'),
+            field('time')->rules('required'),
         ];
     }
+    public function show(RestifyRequest $request, $repositoryId)
+{
+    // dd($request);
+    // dd($repositoryId);
+    return response($this->model());
+}
 }
