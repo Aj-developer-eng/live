@@ -25,9 +25,9 @@ $timeAndSeen = "<span data-time='$created_at' class='message-time'>
                 @endif
             </div>
         @endif
-        @if(@$attachment->type == 'image') 
+        @if(@$attachment->type == 'image')
         <div class="image-wrapper" style="text-align: {{$isSender ? 'end' : 'start'}}">
-            <div class="image-file chat-image" style="background-image: url('http://127.0.0.1:8000/storage/images/images/attachments/{{ $attachment->file }}')"                ">
+            <div class="image-file chat-image" style="background-image: url('http://127.0.0.1:8000/storage/images/attachments/{{ $attachment->file }}')"                ">
                 <div>{{ $attachment->title }}</div>
             </div>
             <div style="margin-bottom:5px">

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use auth;
-use Pusher\Pusher;
-use Illuminate\Http\Request;
 use App\Events\PusherBroadcast;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Pusher\Pusher;
 
 class pusherController extends Controller
 {
@@ -31,9 +30,9 @@ class pusherController extends Controller
             $app_key = '8a0808c4329361554dd6';
             $app_secret = '416b172eb9c638015c2d';
             $cluster = 'ap2';
-            $pusher = new Pusher($app_key, $app_secret, $app_id, ['cluster' => $cluster,'useTLS' => true,]);
+            $pusher = new Pusher($app_key, $app_secret, $app_id, ['cluster' => $cluster, 'useTLS' => true]);
 
-            $response = $pusher->trigger('chat_channel', 'App\\Events\\MessageSent', ['message' => 'hi i em awaab.','user_id' =>1]);
+            $response = $pusher->trigger('chat_channel', 'App\\Events\\MessageSent', ['message' => 'hi i em awaab.', 'user_id' => 1]);
 
             if ($response) {
 
@@ -66,5 +65,47 @@ class pusherController extends Controller
     public function receive(Request $request)
     {
         return view('receive', ['message' => $request->get('message')]);
+    }
+    public function retrive_images()
+    {
+        $imagesArr = [];
+        $folderPath = public_path('images');
+        $files = glob($folderPath . '/*');
+
+        if ($files !== false) {
+            foreach ($files as $filePath) {
+                $originalURL = $filePath;
+
+                // Add the "images" segment after "storage/"
+                $modifiedURL = str_replace('E:\Task-Backend\public\images/', 'http://127.0.0.1:8000/images/', $originalURL);
+                // dd($modifiedURL);
+                array_push($imagesArr, $modifiedURL);
+            }
+        } else {
+            echo "No files found in the folder.";
+        }
+        // dd($imagesArr);
+
+        return response($imagesArr);
+    }
+    public function save_image(Request $request)
+    {
+
+        // dd($request);
+        $inputString = $request['img'];
+        $fileName = basename($inputString);
+
+        $folderPath = public_path('images');
+        $files = glob($folderPath . '/' . $fileName);
+// dd($files);
+        if ($files !== false && $files != null) {
+            foreach ($files as $filePath) {
+                echo "exist" . "<br>";
+                echo $filePath . "<br>";die;
+            }
+        } else {
+            echo "No files found in the folder.";die;
+        }
+
     }
 }

@@ -43,3 +43,7 @@ Route::post('sendMessage', [pusherController::class,'sendMessage']);
 Route::get('/home', 'App\Http\Controllers\pusherController@index');
 Route::post('/broadcast', 'App\Http\Controllers\pusherController@broadcast');
 Route::post('/receive', 'App\Http\Controllers\pusherController@receive');
+
+
+Route::get('/retrive_images', 'App\Http\Controllers\pusherController@retrive_images');
+Route::post('/save_image', 'App\Http\Controllers\pusherController@save_image');
