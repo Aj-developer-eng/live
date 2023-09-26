@@ -1,23 +1,30 @@
 <?php
-function customFunction($inputString) {
+function customFunction($inputString)
+{
     $fileName = basename($inputString);
 
-        $folderPath = public_path('images');
-        $files = glob($folderPath . '/' . $fileName);
+    $folderPath = public_path('images');
+    $files = glob($folderPath . '/' . $fileName);
 // dd($files);
-        if ($files !== false && $files != null) {
-            foreach ($files as $filePath) {
-                return [
-'status'=>"exist",
-'statusCode'=>1
-                ];
-            }
-        } else {
+    if ($files !== false && $files != null) {
+        foreach ($files as $filePath) {
             return [
-                'status'=>"No files found in the folder.",
-                'statusCode'=>0
-                                ];
-
+                'status' => "exist",
+                'statusCode' => 1,
+            ];
         }
+    } else {
+        return [
+            'status' => "No files found in the folder.",
+            'statusCode' => 0,
+        ];
+
+
+
+//1111111
+
+
+    }
 
 }
+?>
